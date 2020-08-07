@@ -6,6 +6,12 @@ function Nav() {
       <a className="navbar-brand" href="/">
         Dashboard
       </a>
+      <a className="navbar-brand" href="/">
+        Saved
+      </a>
+      <a className="navbar-brand" href="/">
+        Search
+      </a>
     </nav>
   );
 }

@@ -17,6 +17,7 @@ export default {
   saveBook: function (bookData) {
     return axios.post("/api/books", bookData);
   },
+  // googleBooks
   googleBooks: function (title) {
     return axios.get("/api/googleBooks/" + title)
   }

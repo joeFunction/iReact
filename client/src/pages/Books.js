@@ -17,11 +17,17 @@ class Books extends Component {
   componentDidMount() {
     this.loadBooks();
   }
+  //googleBooks
+  // loadBooks = async (res) => {
+  //   try {
+  //     console.log(res)
+  //     this.setState({ books: res.data });
 
+  //deezer
   loadBooks = async (res) => {
     try {
-      console.log(res)
-      this.setState({ books: res.data });
+      console.log(res.data.data)
+      this.setState({ books: res.data.data });
 
 
     } catch (error) {
@@ -66,20 +72,16 @@ class Books extends Component {
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <h1>-</h1>
+              <h1>App Name/Logo</h1>
             </Jumbotron>
             <form>
               <Input
                 value={this.state.title}
                 onChange={this.handleInputChange}
                 name="title"
-                placeholder="Title (required)"
-              />
+                placeholder="Title (required)" />
 
-              <FormBtn
-
-                onClick={this.handleFormSubmit}
-              >
+              <FormBtn onClick={this.handleFormSubmit}>
                 Search
               </FormBtn>
             </form>
@@ -97,7 +99,7 @@ class Books extends Component {
                 )
               }
 
-              ) : "no search found"}
+              ) : "No Search Found"}
 
             </ResultsList>
           </Col>
