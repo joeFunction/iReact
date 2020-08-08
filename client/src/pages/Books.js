@@ -6,6 +6,10 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import { flexbox, borders } from '@material-ui/system';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -17,8 +21,36 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const useStylesCard = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    maxWidth: '300px'
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 0 auto',
+  },
+  cover: {
+    width: 151,
+  },
+  controls: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+  },
+  playIcon: {
+    height: 38,
+    width: 38,
+  },
+}));
+
 let Books = () => {
   let classes = useStyles();
+  let classesCard = useStylesCard();
   let [books, setBooks] = useState([])
   let [title, setTitle] = useState('')
 
@@ -92,6 +124,61 @@ let Books = () => {
      <Button variant="contained" color="primary">
   Primary
 </Button>
+<Card className={classesCard.root}>
+      <div className={classesCard.details}>
+        <CardContent className={classesCard.content}>
+          <Typography component="h5" variant="h5">
+            i React
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            Michael Jackson
+          </Typography>
+        </CardContent>
+        
+      </div>
+      <CardMedia
+        className={classesCard.cover}
+        image="https://e.snmc.io/i/300/w/f57ff9ae483244ece19eeb107718abf9/4791444"
+        title="Live from space album cover"
+      />
+    </Card>
+    <Card className={classesCard.root}>
+      <div className={classesCard.details}>
+        <CardContent className={classesCard.content}>
+          <Typography component="h5" variant="h5">
+            Live From Space
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            Mac Miller
+          </Typography>
+        </CardContent>
+        
+      </div>
+      <CardMedia
+        className={classesCard.cover}
+        image="https://e.snmc.io/i/300/w/f57ff9ae483244ece19eeb107718abf9/4791444"
+        title="Live from space album cover"
+      />
+    </Card>
+    <Card className={classesCard.root}>
+      <div className={classesCard.details}>
+        <CardContent className={classesCard.content}>
+          <Typography component="h5" variant="h5">
+            Live From Space
+          </Typography>
+          <Typography variant="subtitle1" color="textSecondary">
+            Mac Miller
+          </Typography>
+        </CardContent>
+        
+      </div>
+      <CardMedia
+        className={classesCard.cover}
+        image="https://e.snmc.io/i/300/w/f57ff9ae483244ece19eeb107718abf9/4791444"
+        title="Live from space album cover"
+      />
+    </Card>
+    
      </>
     );
 }
