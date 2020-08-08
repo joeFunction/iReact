@@ -1,23 +1,29 @@
-import React, { Component } from "react";
-import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
+import React, { useState, useEffect } from "react";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
-import { Col, Row, Container } from "../components/Grid";
-import { List, ListItem } from "../components/List";
-import { Input, TextArea, FormBtn } from "../components/Form";
-import { ResultsList, ResultsListItem } from "../components/ResultsList"
+import Container from '@material-ui/core/Container';
+import { fade, makeStyles } from '@material-ui/core/styles';
+import { flexbox, borders } from '@material-ui/system';
 
-class Books extends Component {
-  state = {
-    books: [],
-    title: ""
-
-  };
-
-  componentDidMount() {
-    this.loadBooks();
+const useStyles = makeStyles((theme) => ({
+  title: {
+    flexGrow: 1,
+    display: 'none',
+    [theme.breakpoints.up('sm')]: {
+      display: 'block',
+    },
   }
+}))
+
+let Books = () => {
+  let classes = useStyles();
+  let [books, setBooks] = useState([])
+  let [title, setTitle] = useState('')
+
+  useEffect(() => {
+    loadBooks();
+  }, [])
+
   //googleBooks
   // loadBooks = async (res) => {
   //   try {
@@ -25,12 +31,10 @@ class Books extends Component {
   //     this.setState({ books: res.data });
 
   //deezer
-  loadBooks = async (res) => {
+  let loadBooks = async (res) => {
     try {
       console.log(res.data.data)
-      this.setState({ books: res.data.data });
-
-
+      setBooks(res.data.data)
     } catch (error) {
       console.log(error);
     }
@@ -44,70 +48,57 @@ class Books extends Component {
   //     .catch(err => console.log(err));
   // };
 
-  deleteBook = id => {
+  let deleteBook = id => {
     API.deleteBook(id)
       .then(res => this.loadBooks())
       .catch(err => console.log(err));
   };
 
-  handleInputChange = event => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value
-    });
+  let handleInputChange = event => {
+    const { value } = event.target;
+    setTitle(value)
   };
 
-  handleFormSubmit = event => {
+  let handleFormSubmit = event => {
     event.preventDefault();
-    console.log(this.state.title)
-    if (this.state.title.length > 0) {
-      API.googleBooks(this.state.title)
-        .then(res => this.loadBooks(res))
+    console.log(title)
+    if (title.length > 0) {
+      API.googleBooks(title)
+        .then(res => loadBooks(res))
         .catch(err => console.log(err));
     }
   };
 
-  render() {
     return (
-      <Container  >
-        <Row>
-          <Col size="md-12">
-            <Jumbotron>
-              <h1>App Name/Logo</h1>
-            </Jumbotron>
-            <form>
-              <Input
-                value={this.state.title}
-                onChange={this.handleInputChange}
-                name="title"
-                placeholder="Title (required)" />
-
-              <FormBtn onClick={this.handleFormSubmit}>
-                Search
-              </FormBtn>
-            </form>
-          </Col>
-
-
-        </Row>
-        <Row>
-          <Col size="md-12">
-            <ResultsList>
-              {console.log(this.state.books)}
-              {this.state.books.length > 0 ? this.state.books.map((book, index) => {
-                return (
-                  <ResultsListItem book={book} key={index} />
-                )
-              }
-
-              ) : "No Search Found"}
-
-            </ResultsList>
-          </Col>
-        </Row>
+      <Container maxWidth="lg" className="border p-5" borderColor="grey.500">
+        <h1 className="text-center">iReact spotify goodies</h1>
       </Container>
+       
     );
-  }
 }
 
 export default Books;
+
+
+/*
+<Input
+    value={this.state.title}
+    onChange={this.handleInputChange}
+    name="title"
+    placeholder="Title (required)" />
+
+  <FormBtn onClick={this.handleFormSubmit}>
+    Search
+  </FormBtn>
+<ResultsList>
+  {console.log(this.state.books)}
+  {this.state.books.length > 0 ? this.state.books.map((book, index) => {
+    return (
+      <ResultsListItem book={book} key={index} />
+    )
+  }
+
+  ) : "No Search Found"}
+
+</ResultsList>
+*/
