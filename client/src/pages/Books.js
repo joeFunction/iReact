@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import Container from '@material-ui/core/Container';
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { flexbox, borders } from '@material-ui/system';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -70,10 +72,27 @@ let Books = () => {
   };
 
     return (
+      <>
       <Container maxWidth="lg" className="border p-5" borderColor="grey.500">
         <h1 className="text-center">iReact spotify goodies</h1>
       </Container>
-       
+       <TextField
+       id="outlined-full-width"
+       label="Label"
+       style={{ margin: 8 }}
+       placeholder="Placeholder"
+       helperText="Full width!"
+       fullWidth
+       margin="normal"
+       InputLabelProps={{
+         shrink: true,
+       }}
+       variant="outlined"
+     />
+     <Button variant="contained" color="primary">
+  Primary
+</Button>
+     </>
     );
 }
 
