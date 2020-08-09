@@ -24,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
 const useStylesCard = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    maxWidth: '300px'
+    width: '100%'
   },
   details: {
     display: 'flex',
@@ -103,84 +103,63 @@ let Books = () => {
     }
   };
 
-    return (
-      <>
+  return (
+    <>
       <Container maxWidth="lg" className=" p-5 text-center" borderColor="grey.500">
-        <img src="logo.png" class="img-fluid" style={{width: "250px"}}/>
+        <img src="logo.png" class="img-fluid" style={{ width: "250px" }} />
       </Container>
-       <TextField
-       id="outlined-full-width"
-       label="Label"
-       style={{ margin: 8 }}
-       placeholder="Placeholder"
-       helperText="Full width!"
-       fullWidth
-       margin="normal"
-       InputLabelProps={{
-         shrink: true,
-       }}
-       variant="outlined"
-     />
-     <Button variant="contained" color="primary">
-  Primary
-</Button>
-<Card className={classesCard.root}>
-      <div className={classesCard.details}>
-        <CardContent className={classesCard.content}>
-          <Typography component="h5" variant="h5">
-            i React
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Michael Jackson
-          </Typography>
-        </CardContent>
-        
+      <div className="container">
+        <div className="row">
+          <div className="col-8">
+            <TextField
+          id="outlined-full-width"
+          label="Label"
+          style={{ margin: 8 }}
+          placeholder="Placeholder"
+          helperText="Full width!"
+          fullWidth
+          margin="normal"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          variant="outlined"
+        />
+          </div>
+          <div className="col-4 d-flex ">
+          <Button variant="contained" color="primary" className = "align-self-center mb-3">
+            Primary
+    </Button>
+          </div>
+        </div>
       </div>
-      <CardMedia
-        className={classesCard.cover}
-        image="https://e.snmc.io/i/300/w/f57ff9ae483244ece19eeb107718abf9/4791444"
-        title="Live from space album cover"
-      />
-    </Card>
-    <Card className={classesCard.root}>
-      <div className={classesCard.details}>
-        <CardContent className={classesCard.content}>
-          <Typography component="h5" variant="h5">
-            Live From Space
+      
+      
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-sm-5">
+            <Card className={classesCard.root}>
+              <div className={classesCard.details}>
+                <CardContent className={classesCard.content}>
+                  <Typography component="h5" variant="h5">
+                    i React
           </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
+                  <Typography variant="subtitle1" color="textSecondary">
+                    Michael Jackson
           </Typography>
-        </CardContent>
-        
+                </CardContent>
+
+              </div>
+              <CardMedia
+                className={classesCard.cover}
+                image="https://e.snmc.io/i/300/w/f57ff9ae483244ece19eeb107718abf9/4791444"
+                title="Live from space album cover"
+              />
+            </Card>
+          </div>
+        </div>
       </div>
-      <CardMedia
-        className={classesCard.cover}
-        image="https://e.snmc.io/i/300/w/f57ff9ae483244ece19eeb107718abf9/4791444"
-        title="Live from space album cover"
-      />
-    </Card>
-    <Card className={classesCard.root}>
-      <div className={classesCard.details}>
-        <CardContent className={classesCard.content}>
-          <Typography component="h5" variant="h5">
-            Live From Space
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
-            Mac Miller
-          </Typography>
-        </CardContent>
-        
-      </div>
-      <CardMedia
-        className={classesCard.cover}
-        image="https://e.snmc.io/i/300/w/f57ff9ae483244ece19eeb107718abf9/4791444"
-        title="Live from space album cover"
-      />
-    </Card>
-    
-     </>
-    );
+    </>
+  );
 }
 
 export default Books;
