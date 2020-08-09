@@ -21,6 +21,23 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
+const useStylesInput = makeStyles(theme => ({
+  root: {
+      "& .MuiOutlinedInput-input": {
+          color: "#007bff",
+          transition: "0.3s ease-in-out",
+      },
+      "& .MuiInputLabel-root": {
+          color: "#007bff",
+          transition: "0.3s ease-in-out",
+      },
+      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
+          borderColor: "#007bff",
+          transition: "0.3s ease-in-out",
+      },
+  }
+}))
+
 const useStylesCard = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -51,6 +68,9 @@ const useStylesCard = makeStyles((theme) => ({
 let Books = () => {
   let classes = useStyles();
   let classesCard = useStylesCard();
+  let classesInput = useStylesInput();
+
+
   let [books, setBooks] = useState([])
   let [title, setTitle] = useState('')
 
@@ -113,6 +133,7 @@ let Books = () => {
           <div className="col-8">
             <TextField
           id="outlined-full-width"
+          className={classesInput.root}
           label="Label"
           style={{ margin: 8 }}
           placeholder="Placeholder"
