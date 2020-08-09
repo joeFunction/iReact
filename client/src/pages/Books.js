@@ -105,8 +105,8 @@ let Books = () => {
 
     return (
       <>
-      <Container maxWidth="lg" className="border p-5" borderColor="grey.500">
-        <h1 className="text-center">iReact spotify goodies</h1>
+      <Container maxWidth="lg" className=" p-5 text-center" borderColor="grey.500">
+        <img src="logo.png" class="img-fluid" style={{width: "250px"}}/>
       </Container>
        <TextField
        id="outlined-full-width"
