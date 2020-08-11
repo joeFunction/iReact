@@ -4,80 +4,68 @@ import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
-import Container from '@material-ui/core/Container';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import { flexbox, borders } from '@material-ui/system';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
+import { Col, Row, Container } from "../components/Grid";
+import { List, ListItem } from "../components/List";
+import { Input, TextArea, FormBtn } from "../components/Form";
+import { ResultsList, ResultsListItem } from "../components/ResultsList"
 
-const useStyles = makeStyles((theme) => ({
-  title: {
-    flexGrow: 1,
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
+function Books() {
+  // Setting our component's initial state
+  const { user, isAuthenticated } = useAuth0();
+  const [books, setBooks] = useState([])
+  const [formObject, setFormObject] = useState({})
+
+  // Load all books and store them with setBooks
+  // useEffect(() => {
+  //   loadBooks()
+  // }, [])
+
+  // Loads all books and sets them to books
+  function loadBooks(res) {
+    console.log(res.data)
+    setBooks(res.data.data)
+  };
+
+  //   //deezer
+  // loadBooks = async (res) => {
+  //   try {
+  //     console.log(res.data.data)
+  //     this.setState({ books: res.data.data });
+
+  // Deletes a book from the database with a given id, then reloads books from the db
+  function deleteBook(id) {
+    API.deleteBook(id)
+      .then(res => loadBooks())
+      .catch(err => console.log(err));
   }
-}))
 
-const useStylesInput = makeStyles(theme => ({
-  root: {
-      "& .MuiOutlinedInput-input": {
-          color: "#007bff",
-          transition: "0.3s ease-in-out",
-      },
-      "& .MuiInputLabel-root": {
-          color: "#007bff",
-          transition: "0.3s ease-in-out",
-      },
-      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-          borderColor: "#007bff",
-          transition: "0.3s ease-in-out",
-      },
-  }
-}))
+  // Handles updating component state when the user types into the input field
+  function handleInputChange(event) {
+    const { name, value } = event.target;
+    setFormObject({ ...formObject, [name]: value })
+  };
 
-const useStylesCard = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    width: '100%'
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    flex: '1 0 auto',
-  },
-  cover: {
-    width: 151,
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
-  },
-}));
-
-let Books = () => {
-  let classes = useStyles();
-  let classesCard = useStylesCard();
-  let classesInput = useStylesInput();
-
-
-  let [books, setBooks] = useState([])
-  let [title, setTitle] = useState('')
-
-
+  // When the form is submitted, use the API.saveBook method to save the book data // Then reload books from the database
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    console.log(formObject.title)
+    if (formObject.title) {
+      API.googleBooks(formObject.title)
+        .then(res => loadBooks(res))
+        .catch(err => console.log(err));
+    }
+  };
+  // add save button, and call this function 
+  function handleSave(event) {
+    event.preventDefault();
+    console.log(user)
+    console.log(event.currentTarget.attributes[0])
+    // if (this.state.name.length > 0) {
+    //   API.books(this.state.name, this.state.user.sub)
+    //     .then(res => this.loadBooks(res))
+    //     .catch(err => console.log(err));
+    // }
+  };
 
   return (
     <Container fluid>
@@ -94,22 +82,16 @@ let Books = () => {
             />
             <FormBtn
               disabled={!(formObject.title)}
-              onClick={handleFormSubmit}
-            >
-              Search
-            </FormBtn>
+              onClick={handleFormSubmit}>Search</FormBtn>
           </form>
         </Col>
         <Col size="md-6 sm-12">
-          <Jumbotron>
-            <h1>Books On My List</h1>
-          </Jumbotron>
           {books.length ? (
             <List>
               {books.map(book => (
                 <ListItem key={book.id}>
                   <Link to={"/books/" + book.id}>
-                  <ResultsListItem book={book} key={book.id} />
+                    <ResultsListItem book={book} key={book.id} />
                   </Link>
                   <button id={book.id} onClick={handleSave}>SAVE</button>
 
@@ -118,8 +100,8 @@ let Books = () => {
               ))}
             </List>
           ) : (
-            <h3>No Results</h3>
-          )}
+              <h3>No Results</h3>
+            )}
         </Col>
       </Row>
     </Container>
@@ -232,7 +214,7 @@ export default Books;
 
 //               <FormBtn onClick={this.handleFormSubmit}>
 //                 Search
-              
+
 //               </FormBtn>
 //             </form>
 //           </Col>
@@ -243,19 +225,19 @@ export default Books;
 //           <Col size="md-12">
 //             <ResultsList>
 //               {console.log(this.state.books)}
-//               {this.state.books.length > 0 ? this.state.books.map((book, index) => {
+//               {this.state.books.length > 0 ? this.state.books.map(                 (book, index) => {
 //                 return (
 //                   <>
 //                   <ResultsListItem book={book} key={index} />
 //                   <button id={book.id} onClick={this.handleSave}>SAVE</button>
 //                   </>
-                  
+
 //                 )
 //               }
 
 //               ) : "No Search Found"}
 
-      
+
 
 //             </ResultsList>
 //           </Col>
@@ -507,4 +489,3 @@ export default Books;
 
 // </ResultsList>
 // */
-

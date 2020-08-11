@@ -1,5 +1,4 @@
 import React from "react";
-// import Loading from "../Loading/Loading";
 import { Jumbotron } from "react-bootstrap";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
@@ -10,12 +9,12 @@ const Feature = () => {
     return (
         <>
             <Jumbotron>
-                <h1>Hi, {nickname}!</h1>
+                <h1>Hello, {nickname}!</h1>
                 <p>
-                    Welcome the Saved Page.
+                    Welcome the Feature Page.
                 </p>
                 <p>
-                    you by <b>{nickname}</b> if
+                    I won't be refering to you by <b>{nickname}</b> if
                     this page wasn't authenticated, would have I
                     known your email address, <b>{email}</b>.
                 </p>

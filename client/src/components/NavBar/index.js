@@ -31,8 +31,9 @@ const NavBars = () => {
         <Navbar bg="primary" variant="dark">
             {/* <Navbar.Brand href="#home">Navbar</Navbar.Brand> */}
             <Nav className="mr-auto">
-                {/* <Nav.Link href="./Profile">Home</Nav.Link> */}
-                <Nav.Link href="#features">Saved</Nav.Link>
+                <Nav.Link href="/profile">Profile</Nav.Link>
+                <Nav.Link href="/saved">Saved</Nav.Link>
+                <Nav.Link href="/features">Features</Nav.Link>
                 <Nav.Link href="/books">Search</Nav.Link>
             </Nav>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
