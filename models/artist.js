@@ -2,10 +2,16 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  artist: {type: String, required: true},
-  id: {type: String, required: true}
+  artist: [{ firstName: String, lastName: String }],
+  cart: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "artist",
+    },
+  ],
 });
 
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
+

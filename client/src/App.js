@@ -8,6 +8,7 @@ import Detail from "./pages/Detail";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/NavBar";
 import Home from "./components/Home"
+// import Home from "./components/Profile"
 
 function App() {
   // const { isLoading } = useAuth0();
@@ -23,6 +24,7 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" component={Home} />
+          {/* <Route exact path="/" component={Profile} /> */}
           <Route exact path="/books" component={Books} />
           <Route exact path="/books/:id" component={Detail}/>
           <Route component={NoMatch} />

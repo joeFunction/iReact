@@ -78,65 +78,54 @@ let Books = () => {
   let [title, setTitle] = useState('')
 
 
-  return (
-    <>
-      <Container maxWidth="lg" className=" p-5 text-center" borderColor="grey.500">
-        <img src="logo.png" class="img-fluid" style={{ width: "250px" }} />
-      </Container>
-      <div className="container">
-        <div className="row">
-          <div className="col-8">
-            <TextField
-          id="outlined-full-width"
-          className={classesInput.root}
-          label="Label"
-          style={{ margin: 8 }}
-          placeholder="Placeholder"
-          helperText="Full width!"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
-          </div>
-          <div className="col-4 d-flex ">
-          <Button variant="contained" color="primary" className = "align-self-center mb-3">
-            Primary
-    </Button>
-          </div>
-        </div>
-      </div>
-      
-      
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-sm-5">
-            <Card className={classesCard.root}>
-              <div className={classesCard.details}>
-                <CardContent className={classesCard.content}>
-                  <Typography component="h5" variant="h5">
-                    i React
-          </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Michael Jackson
-          </Typography>
-                </CardContent>
 
-              </div>
-              <CardMedia
-                className={classesCard.cover}
-                image="https://e.snmc.io/i/300/w/f57ff9ae483244ece19eeb107718abf9/4791444"
-                title="Live from space album cover"
-              />
-            </Card>
-          </div>
-        </div>
-      </div>
-    </>
+  return (
+    <Container fluid>
+      <Row>
+        <Col size="md-6">
+          {console.log(user)/* <Jumbotron>
+            <h1>What Books Should I Read?</h1>
+          </Jumbotron> */}
+          <form>
+            <Input
+              onChange={handleInputChange}
+              name="title"
+              placeholder="Title (required)"
+            />
+            <FormBtn
+              disabled={!(formObject.title)}
+              onClick={handleFormSubmit}
+            >
+              Search
+            </FormBtn>
+          </form>
+        </Col>
+        <Col size="md-6 sm-12">
+          <Jumbotron>
+            <h1>Books On My List</h1>
+          </Jumbotron>
+          {books.length ? (
+            <List>
+              {books.map(book => (
+                <ListItem key={book.id}>
+                  <Link to={"/books/" + book.id}>
+                  <ResultsListItem book={book} key={book.id} />
+                  </Link>
+                  <button id={book.id} onClick={handleSave}>SAVE</button>
+
+                  <DeleteBtn onClick={() => deleteBook(book.id)} />
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <h3>No Results</h3>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 }
+
 
 export default Books;
 
@@ -518,3 +507,4 @@ export default Books;
 
 // </ResultsList>
 // */
+
