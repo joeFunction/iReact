@@ -74,6 +74,7 @@ function Books() {
           {console.log(user)/* <Jumbotron>
             <h1>What Books Should I Read?</h1>
           </Jumbotron> */}
+          <h1>{user ? user.name : ""}</h1>
           <form>
             <Input
               onChange={handleInputChange}
