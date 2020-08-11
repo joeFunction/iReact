@@ -4,102 +4,26 @@ import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
-
-import Container from '@material-ui/core/Container';
-import { fade, makeStyles } from '@material-ui/core/styles';
-import { flexbox, borders } from '@material-ui/system';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-
-const useStyles = makeStyles((theme) => ({
-  title: {
-    flexGrow: 1,
-    display: 'none',
-    [theme.breakpoints.up('sm')]: {
-      display: 'block',
-    },
-  }
-}))
-
-const useStylesInput = makeStyles(theme => ({
-  root: {
-      "& .MuiOutlinedInput-input": {
-          color: "#007bff",
-          transition: "0.3s ease-in-out",
-      },
-      "& .MuiInputLabel-root": {
-          color: "#007bff",
-          transition: "0.3s ease-in-out",
-      },
-      "& .MuiOutlinedInput-root .MuiOutlinedInput-notchedOutline": {
-          borderColor: "#007bff",
-          transition: "0.3s ease-in-out",
-      },
-  }
-}))
-
-const useStylesCard = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    width: '100%'
-  },
-  details: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  content: {
-    flex: '1 0 auto',
-  },
-  cover: {
-    width: 151,
-  },
-  controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
-  },
-  playIcon: {
-    height: 38,
-    width: 38,
-  },
-}));
-
-let Books = () => {
-  let classes = useStyles();
-  let classesCard = useStylesCard();
-  let classesInput = useStylesInput();
-
-
-  let [books, setBooks] = useState([])
-  let [title, setTitle] = useState('')
-
-// import { Col, Row, Container } from "../components/Grid";
-// import { List, ListItem } from "../components/List";
-// import { Input, TextArea, FormBtn } from "../components/Form";
+import { Col, Row, Container } from "../components/Grid";
+import { List, ListItem } from "../components/List";
+import { Input, TextArea, FormBtn } from "../components/Form";
+import { ResultsList, ResultsListItem } from "../components/ResultsList"
 
 function Books() {
   // Setting our component's initial state
+  const { user, isAuthenticated } = useAuth0();
   const [books, setBooks] = useState([])
   const [formObject, setFormObject] = useState({})
 
-
   // Load all books and store them with setBooks
-  useEffect(() => {
-    loadBooks()
-  }, [])
+  // useEffect(() => {
+  //   loadBooks()
+  // }, [])
 
   // Loads all books and sets them to books
-  function loadBooks() {
-    API.getBooks()
-      .then(res => 
-        setBooks({books: res.data.data})
-      )
-      .catch(err => console.log(err));
+  function loadBooks(res) {
+    console.log(res.data)
+    setBooks(res.data.data)
   };
 
   //   //deezer
@@ -121,81 +45,75 @@ function Books() {
     setFormObject({...formObject, [name]: value})
   };
 
-  // When the form is submitted, use the API.saveBook method to save the book data
-  // Then reload books from the database
+  // When the form is submitted, use the API.saveBook method to save the book data // Then reload books from the database
   function handleFormSubmit(event) {
     event.preventDefault();
-    if (formObject.title && formObject.author) {
-      API.saveBook({
-        title: formObject.title,
-        author: formObject.author,
-        synopsis: formObject.synopsis
-      })
-        .then(res => loadBooks())
+    console.log(formObject.title)
+    if (formObject.title) {
+      API.googleBooks(formObject.title)
+        .then(res => loadBooks(res))
         .catch(err => console.log(err));
     }
   };
-
+// add save button, and call this function 
+    function handleSave (event) {
+    event.preventDefault();
+    console.log(user)
+    console.log(event.currentTarget.attributes[0])
+    // if (this.state.name.length > 0) {
+    //   API.books(this.state.name, this.state.user.sub)
+    //     .then(res => this.loadBooks(res))
+    //     .catch(err => console.log(err));
+    // }
+  };
 
   return (
-    <>
-      <Container maxWidth="lg" className=" p-5 text-center" borderColor="grey.500">
-        <img src="logo.png" class="img-fluid" style={{ width: "250px" }} />
-      </Container>
-      <div className="container">
-        <div className="row">
-          <div className="col-8">
-            <TextField
-          id="outlined-full-width"
-          className={classesInput.root}
-          label="Label"
-          style={{ margin: 8 }}
-          placeholder="Placeholder"
-          helperText="Full width!"
-          fullWidth
-          margin="normal"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          variant="outlined"
-        />
-          </div>
-          <div className="col-4 d-flex ">
-          <Button variant="contained" color="primary" className = "align-self-center mb-3">
-            Primary
-    </Button>
-          </div>
-        </div>
-      </div>
-      
-      
-      <div class="container">
-        <div class="row justify-content-center">
-          <div class="col-sm-5">
-            <Card className={classesCard.root}>
-              <div className={classesCard.details}>
-                <CardContent className={classesCard.content}>
-                  <Typography component="h5" variant="h5">
-                    i React
-          </Typography>
-                  <Typography variant="subtitle1" color="textSecondary">
-                    Michael Jackson
-          </Typography>
-                </CardContent>
+    <Container fluid>
+      <Row>
+        <Col size="md-6">
+          {console.log(user)/* <Jumbotron>
+            <h1>What Books Should I Read?</h1>
+          </Jumbotron> */}
+          <form>
+            <Input
+              onChange={handleInputChange}
+              name="title"
+              placeholder="Title (required)"
+            />
+            <FormBtn
+              disabled={!(formObject.title)}
+              onClick={handleFormSubmit}
+            >
+              Search
+            </FormBtn>
+          </form>
+        </Col>
+        <Col size="md-6 sm-12">
+          <Jumbotron>
+            <h1>Books On My List</h1>
+          </Jumbotron>
+          {books.length ? (
+            <List>
+              {books.map(book => (
+                <ListItem key={book.id}>
+                  <Link to={"/books/" + book.id}>
+                  <ResultsListItem book={book} key={book.id} />
+                  </Link>
+                  <button id={book.id} onClick={handleSave}>SAVE</button>
 
-              </div>
-              <CardMedia
-                className={classesCard.cover}
-                image="https://e.snmc.io/i/300/w/f57ff9ae483244ece19eeb107718abf9/4791444"
-                title="Live from space album cover"
-              />
-            </Card>
-          </div>
-        </div>
-      </div>
-    </>
+                  <DeleteBtn onClick={() => deleteBook(book.id)} />
+                </ListItem>
+              ))}
+            </List>
+          ) : (
+            <h3>No Results</h3>
+          )}
+        </Col>
+      </Row>
+    </Container>
   );
 }
+
 
 export default Books;
 
@@ -313,7 +231,7 @@ export default Books;
 //           <Col size="md-12">
 //             <ResultsList>
 //               {console.log(this.state.books)}
-//               {this.state.books.length > 0 ? this.state.books.map((book, index) => {
+//               {this.state.books.length > 0 ? this.state.books.map(                 (book, index) => {
 //                 return (
 //                   <>
 //                   <ResultsListItem book={book} key={index} />
