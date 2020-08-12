@@ -3,7 +3,7 @@ import React from "react";
 import { Jumbotron } from "react-bootstrap";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 
-const Feature = () => {
+const Saved = () => {
     const { user } = useAuth0();
     const { nickname, email } = user;
 
@@ -24,7 +24,7 @@ const Feature = () => {
     );
 };
 
-export default withAuthenticationRequired(Feature, {
+export default withAuthenticationRequired(Saved, {
     // onRedirecting: () => <Loading />,
-    returnTo: "/features"
+    returnTo: "/saved"
 });

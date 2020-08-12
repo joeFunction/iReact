@@ -1,7 +1,7 @@
 import React from "react";
 import { Jumbotron } from "react-bootstrap";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
-//setup global state for user, take user out, user should be global, set user to global state, useContext
+//setup global state for user, take user out, user should be global, set user to global state, use
 
 const Feature = () => {
     const { user } = useAuth0();

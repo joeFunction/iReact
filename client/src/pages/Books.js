@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import DeleteBtn from "../components/DeleteBtn";
 import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
@@ -110,7 +110,10 @@ function Books() {
 }
 
 
-export default Books;
+export default withAuthenticationRequired(Books, {
+  // onRedirecting: () => <Loading />,
+  returnTo: "/books"
+});
 
 
 
