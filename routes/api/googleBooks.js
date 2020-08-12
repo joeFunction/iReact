@@ -2,9 +2,7 @@ const router = require("express").Router();
 const googleController = require("../../controllers/googleController");
 
 // Matches with "/api/books"
-router.route("/:title")
-  .get(googleController.findByTitle)
-   
+router.route("/:title").get(googleController.findByTitle);
 
 // // Matches with "/api/books/:id"
 // router

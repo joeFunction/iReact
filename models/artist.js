@@ -1,17 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const userSchema = new Schema({
+const artistSchema = new Schema({
   artist: [{ firstName: String, lastName: String }],
-  cart: [
+  user: [
     {
       type: Schema.Types.ObjectId,
-      ref: "artist",
+      ref: "user",
     },
   ],
 });
 
-const User = mongoose.model("User", userSchema);
+const artist = mongoose.model("artist", artistSchema);
 
-module.exports = User;
-
+module.exports = artist;
