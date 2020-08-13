@@ -1,7 +1,7 @@
+// import Jumbotron from "../components/Jumbotron";
 import React, { useState, useEffect } from "react";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import DeleteBtn from "../components/DeleteBtn";
-import Jumbotron from "../components/Jumbotron";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
@@ -15,22 +15,11 @@ function Books() {
   const [books, setBooks] = useState([])
   const [formObject, setFormObject] = useState({})
 
-  // Load all books and store them with setBooks
-  // useEffect(() => {
-  //   loadBooks()
-  // }, [])
-
   // Loads all books and sets them to books
   function loadBooks(res) {
     console.log(res.data)
     setBooks(res.data.data)
   };
-
-  //   //deezer
-  // loadBooks = async (res) => {
-  //   try {
-  //     console.log(res.data.data)
-  //     this.setState({ books: res.data.data });
 
   // Deletes a book from the database with a given id, then reloads books from the db
   function deleteBook(id) {
@@ -55,11 +44,11 @@ function Books() {
         .catch(err => console.log(err));
     }
   };
+
   // add save button, and call this function 
   function handleSave(artistData) {
-
-   // event.preventDefault();
-   // alert("click")
+    // event.preventDefault();
+    // alert("click")
     console.log(artistData)
 
     API.saveArtists({
@@ -67,12 +56,7 @@ function Books() {
     }).then(results => {
       console.log(results)
     })
-    // console.log(event.currentTarget.attributes[0])
-    // if (this.state.name.length > 0) {
-    //   API.books(this.state.name, this.state.user.sub)
-    //     .then(res => this.loadBooks(res))
-    //     .catch(err => console.log(err));
-    // }
+
   };
 
   return (
@@ -117,7 +101,6 @@ function Books() {
   );
 }
 
-
 export default withAuthenticationRequired(Books, {
   // onRedirecting: () => <Loading />,
   returnTo: "/books"
@@ -127,6 +110,25 @@ export default withAuthenticationRequired(Books, {
 
 
 //////////////////////////////////
+//   
+
+//deezer
+  // loadBooks = async (res) => {
+    //   try {
+      //     console.log(res.data.data)
+      //     this.setState({ books: res.data.data });
+
+ // console.log(event.currentTarget.attributes[0])
+        // if (this.state.name.length > 0) {
+          //   API.books(this.state.name, this.state.user.sub)
+          //     .then(res => this.loadBooks(res))
+          //     .catch(err => console.log(err));
+          // }
+
+// Load all books and store them with setBooks
+// useEffect(() => {
+//   loadBooks()
+// }, [])
 
 // import React, { Component } from "react";
 // import { useAuth0 } from "@auth0/auth0-react";
@@ -140,7 +142,7 @@ export default withAuthenticationRequired(Books, {
 // import { ResultsList, ResultsListItem } from "../components/ResultsList"
 
 // class Books extends Component {
-//   state = {
+  //   state = {
 //     books: [],
 //     title: "",
 //     user: useAuth0()
