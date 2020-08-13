@@ -21,24 +21,17 @@ const Saved = () => {
                 {artists.length > 0 ? artists.map(artist => {
                     return (
                         <>
-                         <h1>Hi, {nickname}!</h1>
-                <p>
-                    Welcome the Saved Page.
-                </p>
-                    <h2>artist: {artist.artist}</h2>
-                    <img src={artist.picture}/>
-                <p>
-                    you by <b>{nickname}</b> if
-                    this page wasn't authenticated, would have I
-                    known your email address, <b>{email}</b>.
-                </p>
+                        <h1>Hi, {nickname}!</h1>
+                        <p>Welcome the Saved Page.</p>
+                        <h2>artist: {artist.artist}</h2>
+                        <img src={artist.picture}/>
                         </>
                     )
                 })  : ""}
                
             </Jumbotron>
         </>
-    );
+    )
 };
 
 export default withAuthenticationRequired(Saved, {

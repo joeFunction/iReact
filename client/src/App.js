@@ -19,12 +19,12 @@ function App() {
         <Nav />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/features" component={Feature} />
-          <Route exact path="/profile" component={Profile} />
           <Route exact path="/saved" component={Saved} />
           <Route exact path="/search" component={Books} />
-          <Route exact path="/books/:id" component={Detail}/>
           <Route component={NoMatch} />
+          {/* <Route exact path="/features" component={Feature} />
+          <Route exact path="/profile" component={Profile} /> */}
+          {/* <Route exact path="/books/:id" component={Detail}/> */}
         </Switch>
       </>
     </Router>
