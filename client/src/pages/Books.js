@@ -22,9 +22,11 @@ function Books() {
   };
 
   // Deletes a book from the database with a given id, then reloads books from the db
-  function deleteBook(id) {
-    API.deleteBook(id)
-      .then(res => loadBooks())
+  function deleteBook(artistData) {
+    API.deleteBook({ artist: artistData.name, picture: artistData.picture })
+      // .then(res => loadBooks())
+      .then(results => {
+        console.log(results)})
       .catch(err => console.log(err));
   }
 
@@ -47,8 +49,6 @@ function Books() {
 
   // add save button, and call this function 
   function handleSave(artistData) {
-    // event.preventDefault();
-    // alert("click")
     console.log(artistData)
 
     API.saveArtists({
@@ -87,8 +87,6 @@ function Books() {
                     <ResultsListItem book={book} key={book.id} />
                   </Link>
                   <button id={book.id} onClick={() => handleSave(book)}>SAVE</button>
-
-                  <DeleteBtn onClick={() => deleteBook(book.id)} />
                 </ListItem>
               ))}
             </List>

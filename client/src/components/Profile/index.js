@@ -8,11 +8,7 @@ const Profile = ({ user }) => {
             <Jumbotron>
                 <h1>Hello, {user.nickname}!</h1>
                 <p>
-                    You have entered the realm.
-                </p>
-                <p>
-                    Below table shows the user profile details that are
-                    returned from Auth0.
+                    Below is your profile information.
                 </p>
             </Jumbotron>
             <Container>

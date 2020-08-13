@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Jumbotron } from "react-bootstrap";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import API from "../utils/API"
+import DeleteBtn from "../components/DeleteBtn";
 
 const Saved = () => {
     const { user } = useAuth0();
@@ -14,21 +15,28 @@ const Saved = () => {
          })
     },[]) 
 
+    function deleteBook(artistData) {
+        API.deleteBook({ artist: artistData.name, picture: artistData.picture })
+          // .then(res => loadBooks())
+          .then(results => {
+            console.log(results)})
+          .catch(err => console.log(err));
+      }
+
     return (
         <>
            {console.log(artists)}
             <Jumbotron>
+                <h1>Hi, {nickname}!</h1>
                 {artists.length > 0 ? artists.map(artist => {
                     return (
                         <>
-                        <h1>Hi, {nickname}!</h1>
-                        <p>Welcome the Saved Page.</p>
-                        <h2>artist: {artist.artist}</h2>
+                        <h2>Artist: {artist.artist}</h2>
                         <img src={artist.picture}/>
-                        </>
-                    )
+                        <DeleteBtn onClick={() => deleteBook(artist)} />
+                        </> 
+                    ) 
                 })  : ""}
-               
             </Jumbotron>
         </>
     )

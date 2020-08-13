@@ -3,19 +3,29 @@ import Thumbnail from "../Thumbnail";
 import { Container, Row, Col } from "../Grid";
 import Books from "../../pages/Books";
 
-// Exporting both RecipeList and RecipeListItem from this file
-
-// RecipeList renders a bootstrap list item
 export function ResultsList({ children }) {
   return <ul className="list-group">{children}</ul>;
 }
 
-// RecipeListItem renders a bootstrap list item containing data from the recipe api call
 export function ResultsListItem({
   book, index
 }) {
   return (
-    // <li className="list-group-item">
+    <Container>
+      <Row>
+        <Col size="xs-4 sm-2">
+          <Thumbnail src={book.picture} />
+        </Col>
+        <Col size="xs-8 sm-9">
+          <h3>{book.name}</h3>
+          <a target="_blank" href={book.link}>Bio</a>
+        </Col>
+      </Row>
+    </Container>
+  );
+}
+
+// <li className="list-group-item">
     //   <Container>
     //     <Row>
     //       <Col size="xs-4 sm-2">
@@ -32,22 +42,3 @@ export function ResultsListItem({
     //     </Row>
     //   </Container>
     // </li>
-
-    <Container>
-      <Row>
-        <Col size="xs-4 sm-2">
-          <Thumbnail src={book.picture} />
-        </Col>
-        <Col size="xs-8 sm-9">
-          <h3>{book.name}</h3>
-          <p>Artist: {book.artist}</p>
-          <p>Bio: {}</p>
-          <a rel="noreferrer noopener" target="_blank" href={book.link}>Link</a>
-        </Col>
-        {/* <button idArtist={book.id} onClick={handleSave}>SAVE</button> */}
-      </Row>
-    </Container>
-  );
-}
-
-
