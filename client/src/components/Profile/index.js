@@ -5,7 +5,7 @@ const Profile = ({ user }) => {
     return (
         <>
             {console.log(user)}
-            <Jumbotron>
+            <Jumbotron className="profile-landing">
                 <h1>Hello, {user.nickname}!</h1>
                 <p>
                     You have entered the realm.
