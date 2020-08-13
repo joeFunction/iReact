@@ -10,7 +10,7 @@ import Nav from "./components/NavBar";
 import Home from "./components/Home"
 import Feature from "./components/Feature"
 import Profile from "./components/Profile"
-import Saved from "./components/Saved"
+import Saved from "./pages/saved"
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
           <Route exact path="/features" component={Feature} />
           <Route exact path="/profile" component={Profile} />
           <Route exact path="/saved" component={Saved} />
-          <Route exact path="/books" component={Books} />
+          <Route exact path="/search" component={Books} />
           <Route exact path="/books/:id" component={Detail}/>
           <Route component={NoMatch} />
         </Switch>
