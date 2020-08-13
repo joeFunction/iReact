@@ -2,7 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  artist: [{ firstName: String, lastName: String }],
+  artist:  String,  
+  picture: String,
   cart: [
     {
       type: Schema.Types.ObjectId,
@@ -11,7 +12,7 @@ const userSchema = new Schema({
   ],
 });
 
-const User = mongoose.model("User", userSchema);
+const Artist = mongoose.model("Artist", userSchema);
 
-module.exports = User;
+module.exports = Artist;
 

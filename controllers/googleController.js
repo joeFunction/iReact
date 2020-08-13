@@ -11,9 +11,10 @@
 
 // };
 
+// Defining methods for the deezerController
+
 const db = require("../models");
 const axios = require("axios")
-// Defining methods for the booksController
 module.exports = {
   findByTitle: function (req, res) {
     const title = req.params.title

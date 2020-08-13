@@ -34,7 +34,7 @@ const NavBars = () => {
                 <Nav.Link href="/profile">Profile</Nav.Link>
                 <Nav.Link href="/saved">Saved</Nav.Link>
                 <Nav.Link href="/features">Features</Nav.Link>
-                <Nav.Link href="/books">Search</Nav.Link>
+                <Nav.Link href="/search">Search</Nav.Link>
             </Nav>
             {isAuthenticated ? <LogoutButton /> : <LoginButton />}
         </Navbar>

@@ -20,5 +20,12 @@ export default {
   // googleBooks
   googleBooks: function (title) {
     return axios.get("/api/googleBooks/" + title)
+  },
+  saveArtists: function (artistData) {
+    return axios.post("/api/artists", artistData)
+  },
+  getArtists: function () {
+    return axios.get("/api/artists")
   }
 };
+

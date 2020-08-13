@@ -56,10 +56,18 @@ function Books() {
     }
   };
   // add save button, and call this function 
-  function handleSave(event) {
-    event.preventDefault();
-    console.log(user)
-    console.log(event.currentTarget.attributes[0])
+  function handleSave(artistData) {
+
+   // event.preventDefault();
+   // alert("click")
+    console.log(artistData)
+
+    API.saveArtists({
+      artist: artistData.name, picture: artistData.picture
+    }).then(results => {
+      console.log(results)
+    })
+    // console.log(event.currentTarget.attributes[0])
     // if (this.state.name.length > 0) {
     //   API.books(this.state.name, this.state.user.sub)
     //     .then(res => this.loadBooks(res))
@@ -94,7 +102,7 @@ function Books() {
                   <Link to={"/books/" + book.id}>
                     <ResultsListItem book={book} key={book.id} />
                   </Link>
-                  <button id={book.id} onClick={handleSave}>SAVE</button>
+                  <button id={book.id} onClick={() => handleSave(book)}>SAVE</button>
 
                   <DeleteBtn onClick={() => deleteBook(book.id)} />
                 </ListItem>
