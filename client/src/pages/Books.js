@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuth0, withAuthenticationRequired } from "@auth0/auth0-react";
 import DeleteBtn from "../components/DeleteBtn";
+import SaveBtn from "../components/SaveButton";
 import API from "../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../components/Grid";
@@ -15,32 +16,33 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import './books.css'
 
-const useStylesCard = makeStyles((theme) => ({
-    root: {
-      display: 'flex',
-      width: '100%'
-    },
-    details: {
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    content: {
-      flex: '1 0 auto',
-    },
-    cover: {
-      width: 151,
-    },
-    controls: {
-      display: 'flex',
-      alignItems: 'center',
-      paddingLeft: theme.spacing(1),
-      paddingBottom: theme.spacing(1),
-    },
-    playIcon: {
-      height: 38,
-      width: 38,
-    }
+const useStyleCards = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    width: '100%'
+  },
+  details: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  content: {
+    flex: '1 0 auto',
+  },
+  cover: {
+    width: 151,
+  },
+  controls: {
+    display: 'flex',
+    alignItems: 'center',
+    paddingLeft: theme.spacing(1),
+    paddingBottom: theme.spacing(1),
+  },
+  playIcon: {
+    height: 38,
+    width: 38,
+  }
 }))
+
 function Books() {
   // Setting our component's initial state
   const { user, isAuthenticated } = useAuth0();
@@ -58,7 +60,8 @@ function Books() {
     API.deleteBook({ artist: artistData.name, picture: artistData.picture })
       // .then(res => loadBooks())
       .then(results => {
-        console.log(results)})
+        console.log(results)
+      })
       .catch(err => console.log(err));
   }
 
@@ -92,48 +95,47 @@ function Books() {
   };
 
   return (
-    <Container fluid>
-      <Row>
-        <Col size="md-6">
-          {console.log(user)/* <Jumbotron>
-            <h1>What Books Should I Read?</h1>
-          </Jumbotron> */}
-          <h1>{user ? user.name : ""}</h1>
-          <form>
-            <Input
-              onChange={handleInputChange}
-              name="title"
-              placeholder="Title (required)"
-            />
-            <FormBtn
-              disabled={!(formObject.title)}
-              onClick={handleFormSubmit}>Search</FormBtn>
-          </form>
-        </Col>
-        <Col size="md-6 sm-12">
-          {books.length ? (
-            <List>
-              {books.map(book => (
-                <ListItem>
-                  <Link to={"/books/" + book.id}>
-                    <ResultsListItem book={book} key={book.id} />
-                  </Link>
-                  <button id={book.id} onClick={() => handleSave(book)}>SAVE</button>
-                </ListItem>
-              ))}
-            </List>
-          ) : (
-              <h3>No Results</h3>
-            )}
-        </Col>
-      </Row>
-    </Container>
+    
+      <Container fluid>
+        <Row>
+          <Col size="md-6">
+            {/* <h1>{user ? user.name : ""}</h1> */}
+            <form>
+              <Input
+                onChange={handleInputChange}
+                name="title"
+                placeholder="Artist (required)"
+              />
+              <FormBtn
+                disabled={!(formObject.title)}
+                onClick={handleFormSubmit}>Search</FormBtn>
+            </form>
+          </Col>
+          <Col size="md-6 sm-12">
+            {books.length ? (
+              <List>
+                {books.map(book => (
+                  <ListItem>
+                    <Link to={"/books/" + book.id}>
+                      <ResultsListItem book={book} key={book.id} />
+                    </Link>
+                    {/* <button id={book.id} onClick={() => handleSave(book)}>SAVE</button> */}
+                    <SaveBtn id={book.id} onClick={() => handleSave(book)} />
+                  </ListItem>
+                ))}
+              </List>
+            ) : (
+                <h3>No Results</h3>
+              )}
+          </Col>
+        </Row>
+      </Container>
+      
   );
 }
 
 export default withAuthenticationRequired(Books, {
-  // onRedirecting: () => <Loading />,
-  returnTo: "/books"
+        returnTo: "/books"
 });
 
 

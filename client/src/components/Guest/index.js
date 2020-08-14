@@ -6,10 +6,7 @@ const Guest = () => {
         <Jumbotron>
             <h1>Hello, Guest!</h1>
             <p>
-                This is a simple authentication app using Auth0.
-            </p>
-            <p>
-                Use the Log In button on top right to login and see your profile details.
+                Login and start saving your favorite Artists!
             </p>
         </Jumbotron>
     );
