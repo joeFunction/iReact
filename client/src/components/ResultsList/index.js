@@ -12,6 +12,7 @@ export function ResultsListItem({
 }) {
   return (
     <Container>
+      
       <Row>
         <Col size="xs-4 sm-2">
           <Thumbnail src={book.picture} />

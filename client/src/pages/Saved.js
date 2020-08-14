@@ -10,22 +10,27 @@ const Saved = () => {
     const [ artists, setArtists ] = useState([])
 
     useEffect(() => {
-         API.getArtists().then(results => {
-             setArtists(results.data)
-         })
+         getArtists()
     },[]) 
 
-    function deleteBook(artistData) {
-        API.deleteBook({ artist: artistData.name, picture: artistData.picture })
-          // .then(res => loadBooks())
-          .then(results => {
-            console.log(results)})
-          .catch(err => console.log(err));
-      }
+    function getArtists () {
+        API.getArtists().then(results => {
+            console.log(results.data)
+            setArtists(results.data)
+        })
+    }
 
+    function deleteArtist(artistId) {
+        console.log(artistId)
+        API.deleteArtist(artistId)
+          .then(res => console.log(res))
+          .catch(err => console.log(err));
+          getArtists();
+        }
+        
     return (
         <>
-           {console.log(artists)}
+           {console.log(artists[0])}
             <Jumbotron>
                 <h1>Hi, {nickname}!</h1>
                 {artists.length > 0 ? artists.map(artist => {
@@ -33,7 +38,7 @@ const Saved = () => {
                         <>
                         <h2>Artist: {artist.artist}</h2>
                         <img src={artist.picture}/>
-                        <DeleteBtn onClick={() => deleteBook(artist)} />
+                        <DeleteBtn onClick={() => deleteArtist(artist._id)} />
                         </> 
                     ) 
                 })  : ""}

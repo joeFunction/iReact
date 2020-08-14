@@ -82,7 +82,7 @@ function Books() {
           {books.length ? (
             <List>
               {books.map(book => (
-                <ListItem key={book.id}>
+                <ListItem>
                   <Link to={"/books/" + book.id}>
                     <ResultsListItem book={book} key={book.id} />
                   </Link>

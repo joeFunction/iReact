@@ -23,8 +23,9 @@ export default {
   getArtists: function () {
     return axios.get("/api/artists")
   },
-  deleteBook: function (artistData) {
-    return axios.delete("/api/artist");
+  deleteArtist: function (artistId) {
+    console.log(artistId)
+    return axios.delete("/api/artists/" + artistId);
   },
 };
 

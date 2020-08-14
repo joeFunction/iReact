@@ -5,13 +5,12 @@ const artistsController = require("../../controllers/artistsController");
 router.route("/")
   .get(artistsController.findAll)
   .post(artistsController.create)
-  .delete(artistsController.remove);
 
 // Matches with "/api/books/:id"
-// router
-//   .route("/:id")
-//   .get(booksController.findById)
-//   .put(booksController.update)
-//   .delete(booksController.remove);
+router
+  .route("/:id")
+  .get(artistsController.findById)
+  .put(artistsController.update)
+  .delete(artistsController.remove);
 
 module.exports = router;
