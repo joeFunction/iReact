@@ -2,12 +2,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  artist:  String,  
+  artist: String,
   picture: String,
-  cart: [
+  user: [
     {
       type: Schema.Types.ObjectId,
-      ref: "artist",
+      ref: "user",
     },
   ],
 });
@@ -15,4 +15,3 @@ const userSchema = new Schema({
 const Artist = mongoose.model("Artist", userSchema);
 
 module.exports = Artist;
-
