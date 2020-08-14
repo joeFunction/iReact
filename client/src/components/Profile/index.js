@@ -5,7 +5,7 @@ const Profile = ({ user }) => {
     return (
         <>
             {console.log(user)}
-            <Jumbotron>
+            <Jumbotron className="profile-landing">
                 <h1>Hello, {user.nickname}!</h1>
                 <p>
                     Below is your profile information.
@@ -14,7 +14,7 @@ const Profile = ({ user }) => {
             <Container>
                 <Row>
                     <Col>
-                        <Table striped bordered hover size="sm">
+                        <Table striped bordered hover size="sm" className="text-light">
                             <thead>
                                 <tr>
                                     <th>Email</th>
