@@ -18,7 +18,7 @@ const Profile = ({ user }) => {
             <Container>
                 <Row>
                     <Col>
-                        <Table striped bordered hover size="sm">
+                        <Table striped bordered hover size="sm" className="text-light">
                             <thead>
                                 <tr>
                                     <th>Email</th>
