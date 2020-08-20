@@ -14,7 +14,7 @@ This is the 3rd and final group project for the UofA coding boot camp course. iR
 (Author)
 
 ## User Story:
-As a user, I want to be able to create my favorie music list that I can quickly acess and will be organized by the artist and music style.
+As a user, I want to be able to create my favorie music list that I can quickly access and will be organized by the artist and music style.
 
 ## Usage:
 If you are a musician, DJ or just a music enthusiast this app will save you time and hassle when playing your favorite songs. 
