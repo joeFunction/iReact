@@ -53,15 +53,7 @@ https://github.com/joeFunction/iReact
 https://i-react.herokuapp.com/
 
 ## Developer/Contributors:
-Joe Adams (https://github.com/joeFunction),
-
-Esme Rodriguez (https://github.com/RodEsme24),
-
-Steven Acevedo (https://github.com/buringKite),
-
-Thomas Olson (https://github.com/Tpoppp77),
-
-Matt Dalla Vecchia (https://github.com/mattdvphx).
+Joe Adams (https://github.com/joeFunction)
 
 ### Author:
 Joe Adams
