@@ -32,7 +32,7 @@ Must utilize at least two libraries, packages, or technologies that we haven't d
 Must allow for or involve the authentication of users in some way.
 Must have a polished frontend / UI.
 Must have folder structure that meets MVC Paradigm.
-Must meet good quality coding standards (indentation, scoping, naming).
+Must meet good quality coding standards.
 
 ## Technologies:
 HTML,
