@@ -10,7 +10,7 @@ function NoMatch() {
           <Jumbotron>
             <h1>404 Page was Not Found</h1>
             <h1>
-              <span role="img" aria-label="Face With Rolling Eyes Emoji">
+              <span role="img" aria-label="Rolling Eyes Emoji">
                 🙄
               </span>
             </h1>
