@@ -48,6 +48,5 @@ const Saved = () => {
 };
 
 export default withAuthenticationRequired(Saved, {
-    // onRedirecting: () => <Loading />,
     returnTo: "/saved"
 });
