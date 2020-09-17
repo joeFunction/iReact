@@ -4,7 +4,7 @@ import { Jumbotron } from "react-bootstrap";
 const Guest = () => {
     return (
         <Jumbotron>
-            <h1>Hello, Guest!</h1>
+            <h1>Hello!</h1>
             <p>
                 Login and start saving your favorite Artists!
             </p>
